@@ -4,12 +4,22 @@
 
 
 ## Quickstart
-
 In the root of the project in which you plan to use the helper, in the command line run:
 
 ```bash
 npm i prettify
 ```
+
+## Usage
+Use this helper in a "parent" [layout](http://assemble.io/docs/Layouts.html):
+
+```html
+{{#prettify}}
+  {{> body }}
+{{/prettify}}
+```
+_See [nested layouts](http://assemble.io/docs/Layouts.html#nested-layouts)_.
+
 
 ## Options
 Options can be either set in the Assemble task or target options in your Gruntfile:
@@ -45,10 +55,16 @@ _Alias for `indent_size`_
 
 The indentation size to be used on the output HTML.
 
+```html
+{{#prettify indent="4"}}
+  {{> body }}
+{{/prettify}}
+```
+
 This helper is based on [grunt-prettify](https://github.com/jonschlinkert/grunt-prettify), which depends on and extends [js-beautify](https://github.com/einars/js-beautify). To learn about additional options, please visit those projects.
 
 
-## Example Usage
+## Example
 
 Template: `index.hbs`
 
@@ -71,15 +87,6 @@ Pellentesque nulla augue, volutpat vitae
 </body>
 </html>
 ```
-
-Use this helper in a "parent" [layout](http://assemble.io/docs/Layouts.html):
-
-```html
-{{#prettify}}
-  {{> body }}
-{{/prettify}}
-```
-_See [nested layouts](http://assemble.io/docs/Layouts.html#nested-layouts)_.
 
 Renders to:
 
