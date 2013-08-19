@@ -2,6 +2,8 @@
 
 > A Handlebars helper for prettifying rendered HTML.
 
+This helper is based on [grunt-prettify](https://github.com/jonschlinkert/grunt-prettify), which depends on and extends [js-beautify](https://github.com/einars/js-beautify). To learn about additional options, please visit those projects.
+
 
 ## Quickstart
 In the root of the project in which you plan to use the helper, in the command line run:
@@ -22,8 +24,9 @@ _See [nested layouts](http://assemble.io/docs/Layouts.html#nested-layouts)_.
 
 
 ## Options
-Options can be either set in the Assemble task or target options in your Gruntfile:
 
+### task options
+Options can be set in your Gruntfile, in the `prettify` object in the Assemble task or target options:
 
 ```javascript
 grunt.initConfig({
@@ -31,29 +34,16 @@ grunt.initConfig({
     options: {
       prettify: {
         indent: 4
-        // ...
       }
     },
-    project: {
+    docs: {
       // Target-specific file lists and/or options go here.
     }
   }
 });
 ```
-
-### condense
-Type: `Boolean`
-Default value: `true`
-
-Removes extra newlines and retains indenting.
-
-### indent
-Type: `Number`
-Default value: `2`
-
-_Alias for `indent_size`_
-
-The indentation size to be used on the output HTML.
+### hash options
+Options passed in as hash arguments will override options defined in the Gruntfile:
 
 ```handlebars
 {{#prettify indent="4"}}
@@ -61,10 +51,48 @@ The indentation size to be used on the output HTML.
 {{/prettify}}
 ```
 
-This helper is based on [grunt-prettify](https://github.com/jonschlinkert/grunt-prettify), which depends on and extends [js-beautify](https://github.com/einars/js-beautify). To learn about additional options, please visit those projects.
+### condense
+Type: `Boolean`
+Default value: `true`
+
+Removes extra newlines and retains indenting:
+
+### newlines
+Type: `Boolean`
+Default value: `True`
+
+Add a newline above each code comment:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- code comment -->
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>My Blog</h1>
+    <h2>Post of the day</h2>
+
+    <!-- scripts -->
+    <a href="#">Read more...</a>
+  </body>
+</html>
+```
+
+### indent
+Type: `Number`
+Default value: `2`
+
+The indentation size to be used on the output HTML. _Alias for `indent_size`_
 
 
-## Example
+
+## Usage Examples
+
+### indent
 
 Template: `index.hbs`
 
@@ -111,3 +139,56 @@ Renders to:
   </body>
 </html>
 ```
+
+
+### condensed
+Example output with `condensed: true`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- code comment -->
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>My Blog</h1>
+    <h2>Post of the day</h2>
+    <!-- scripts -->
+    <a href="#">Read more...</a>
+  </body>
+</html>
+```
+
+### newlines
+Example output with `newlines: true`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- code comment -->
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>My Blog</h1>
+    <h2>Post of the day</h2>
+
+    <!-- scripts -->
+    <a href="#">Read more...</a>
+  </body>
+</html>
+```
+
+## Release History
+
+_Nothing yet_
+
+
+***
+
+Project authored by [Jon Schlinkert](https://github.com/jonschlinkert/).
+
