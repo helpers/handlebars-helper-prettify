@@ -13,7 +13,7 @@ npm i prettify
 ## Usage
 Use this helper in a "parent" [layout](http://assemble.io/docs/Layouts.html):
 
-```html
+```handlebars
 {{#prettify}}
   {{> body }}
 {{/prettify}}
@@ -27,7 +27,7 @@ Options can be either set in the Assemble task or target options in your Gruntfi
 
 ```javascript
 grunt.initConfig({
-  prettify: {
+  assemble: {
     options: {
       prettify: {
         indent: 4
@@ -55,7 +55,7 @@ _Alias for `indent_size`_
 
 The indentation size to be used on the output HTML.
 
-```html
+```handlebars
 {{#prettify indent="4"}}
   {{> body }}
 {{/prettify}}
@@ -68,7 +68,8 @@ This helper is based on [grunt-prettify](https://github.com/jonschlinkert/grunt-
 
 Template: `index.hbs`
 
-```html
+```handlebars
+{{#prettify indent="2"}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,6 +87,7 @@ Pellentesque nulla augue, volutpat vitae
 <a href="#">Read more...</a>
 </body>
 </html>
+{{/prettify}}
 ```
 
 Renders to:

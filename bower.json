@@ -1,4 +1,4 @@
 {
-  "name": "prettify",
-  "dependencies": {}
+  "name": "helper-prettify",
+  "main": "index.js"
 }

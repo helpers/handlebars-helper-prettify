@@ -7,53 +7,60 @@
 
 var _ = require('lodash');
 
-module.exports.register = register = function(Handlebars, options) {
-  var prettify = require('js-beautify').html;
+(function() {
+  module.exports.register = function(Handlebars, options) {
+    var prettify = require('js-beautify').html;
+    var assembleOptions = options;
 
-  /**
-   * Prettify HTML output
-   * @param   {indent} hash [the level to indent output HTML] @default [2]
-   * @example:
-   *   {{#prettify indent="6"}}
-   *     {{> body }}
-   *   {{/prettify}}
-   */
-  Handlebars.registerHelper('prettify', function (options) {
-    var hash = options.hash;
-    opts = _.extend(hash, opts);
-    // reduce multiple newlines to a single newline then add a newline above each comment.
-    return prettifyHTML(options.fn(this).replace(/(\n|\r){2,}/g, '\n').replace(/(\s*<!--)/g, '\n$1'),
-      _.extend(opts, options.hash)
-    );
-  });
+    /**
+     * Prettify HTML output
+     * @example:
+     *   {{#prettify indent="2"}}
+     *     {{> body }}
+     *   {{/prettify}}
+     */
+    Handlebars.registerHelper('prettify', function (options) {
+      var hash = _.extend(options.hash, assembleOptions.prettify);
+      var content = prettifyHTML(options.fn(this), hash);
 
-  /**
-   * Default options passed to js-beautify.
-   * @param {hash arguments} [Options received as hash arguments will override these defaults.]
-   * @param {task options}   [Options defined in the Assemble task/target overrides hash arguments.]
-   */
-  var opts = {
-    condense: true,
-    indent_size: 2,
-    indent_char: " ",
-    indent_inner_html: true,
-    indent_scripts: "normal",
-    brace_style: "expand",
-    preserve_newline: false,
-    max_preserve_newline: 0
+      // Reduce multiple newlines to a single newline
+      if(assembleOptions.prettify.condense === true) {
+        content = content.replace(/(\n|\r){2,}/g, '\n');
+      }
+      // Add a single newline above code comments.
+      if(assembleOptions.prettify.newlines === true) {
+        content = content.replace(/(\s*<!--)/g, '\n$1');
+      }
+
+      return content;
+    });
+
+    /**
+     * Default options passed to js-beautify.
+     * @param {hash arguments} [Options received as hash arguments will override defaults.]
+     * @param {task options}   [Options defined in the task/target override hash arguments.]
+     */
+    var defaults = {
+      indent_size: 2,
+      indent_inner_html: true,
+      unformatted: ['code', 'pre']
+    };
+    defaults = _.extend(assembleOptions.prettify, defaults);
+    defaults.indent_size = defaults.indent;
+
+    /**
+     * Format HTML with js-beautify, pass in options.
+     * @param   {String} source  [The un-prettified HTML.]
+     * @param   {Object} options [Object of options passed to js-beautify.]
+     * @returns {String}         [Stunning HTML.]
+     */
+    var prettifyHTML = function(source, options) {
+      try {
+        return prettify(source, options);
+      } catch (e) {
+        console.error(e);
+        console.warn('HTML beautification failed.');
+      }
+    };
   };
-  opts = _.extend(opts, options.prettify);
-
-  // Alias
-  opts.indent_size = opts.indent;
-
-  // Format HTML with js-beautify, pass in options.
-  var prettifyHTML = function(source, opts) {
-    try {
-      return prettify(source, opts);
-    } catch (e) {
-      grunt.log.error(e);
-      grunt.fail.warn('HTML beautification failed.');
-    }
-  };
-};
+}).call(this);
