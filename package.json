@@ -1,6 +1,6 @@
 {
   "name": "helper-prettify",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/helpers/prettify",
   "author": {
     "name": "Jon Schlinkert",
@@ -19,10 +19,12 @@
       "url": "https://github.com/helpers/prettify/blob/master/LICENSE-MIT"
     }
   ],
-  "devDependencies": {
-    "assemble-internal": "~0.2.0",
+  "dependencies": {
     "lodash": "~1.3.1",
     "js-beautify": "~1.4.0"
+  },
+  "devDependencies": {
+    "assemble-internal": "~0.2.0"
   },
   "keywords": [
     "helper",
