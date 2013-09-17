@@ -1,6 +1,6 @@
-# {{prettify}}
+# {{prettify}} [![NPM version](https://badge.fury.io/js/assemble.png)](http://badge.fury.io/js/assemble)
 
-> A Handlebars helper for prettifying rendered HTML.
+> {{prettify}} handlebars helper, for formatting (beautifying) output HTML.
 
 This helper is based on [grunt-prettify](https://github.com/jonschlinkert/grunt-prettify), which depends on and extends [js-beautify](https://github.com/einars/js-beautify). To learn about additional options, please visit those projects.
 
@@ -9,7 +9,7 @@ This helper is based on [grunt-prettify](https://github.com/jonschlinkert/grunt-
 In the root of the project in which you plan to use the helper, in the command line run:
 
 ```bash
-npm i prettify
+npm i prettify --save
 ```
 
 ## Usage
@@ -90,9 +90,11 @@ The indentation size to be used on the output HTML. _Alias for `indent_size`_
 
 
 
-## Usage Examples
+## Indent Example
 
-### indent
+### Before
+
+Using the `indent` option:
 
 Template: `index.hbs`
 
@@ -118,6 +120,8 @@ Pellentesque nulla augue, volutpat vitae
 {{/prettify}}
 ```
 
+### After
+
 Renders to:
 
 ```html
@@ -141,8 +145,39 @@ Renders to:
 ```
 
 
-### condensed
+## Condense Example
+
+### Before
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- code comment -->
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+
+  </head>
+
+
+  <body>
+    <h1>My Blog</h1>
+    <h2>Post of the day</h2>
+
+
+    <!-- scripts -->
+    <a href="#">Read more...</a>
+
+
+  </body>
+</html>
+```
+
 Example output with `condensed: true`:
+
+## After
 
 ```html
 <!DOCTYPE html>
@@ -161,8 +196,9 @@ Example output with `condensed: true`:
 </html>
 ```
 
-### newlines
-Example output with `newlines: true`:
+### Newlines
+
+When used with `condense`, defining `newlines: true` will result in something like this:
 
 ```html
 <!DOCTYPE html>
@@ -188,7 +224,13 @@ Example output with `newlines: true`:
 _Nothing yet_
 
 
-***
+## Author
 
-Project authored by [Jon Schlinkert](https://github.com/jonschlinkert/).
++ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
++ [github/jonschlinkert](http://github.com/jonschlinkert)
 
+
+## License and Copyright
+
+Licensed under the [MIT License](./LICENSE-MIT)
+Copyright (c) Jon Schlinkert, contributors.
