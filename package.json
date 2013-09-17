@@ -1,6 +1,7 @@
 {
-  "name": "helper-prettify",
-  "version": "0.1.3",
+  "name": "prettify",
+  "version": "0.1.4",
+  "description": "{{prettify}} handlebars helper, for formatting (beautifying) output HTML.",
   "homepage": "https://github.com/helpers/prettify",
   "author": {
     "name": "Jon Schlinkert",
@@ -29,6 +30,7 @@
   "keywords": [
     "helper",
     "mixin",
+    "prettify",
     "handlebars helper",
     "underscore mixin",
     "filter",
