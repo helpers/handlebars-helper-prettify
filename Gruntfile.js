@@ -16,8 +16,7 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'prettify.js',
-        'tests/**/*.js',
-        '<%= nodeunit.tests %>',
+        'tests/**/*.js'
       ],
       options: {
         curly: true,
@@ -69,6 +68,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-readme');
   grunt.loadNpmTasks('grunt-sync-pkg');
   grunt.loadNpmTasks('assemble');
 
@@ -77,6 +77,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['assemble', 'mochaTest']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['clean', 'jshint', 'test', 'sync']);
+  grunt.registerTask('default', ['clean', 'jshint', 'sync', 'readme']);
 
 };
