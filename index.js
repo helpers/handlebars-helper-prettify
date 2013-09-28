@@ -1,78 +1,63 @@
 /**
  * {{prettify}} by Jon Schlinkert
  * http://github.com/helpers/prettify
+ *
  * Copyright (c) 2013 Jon Schlinkert
  * MIT License
  */
 
+'use strict';
+
 var _ = require('lodash');
+var engineOpts = require('./lib/defaults');
 
-module.exports.register = function(Handlebars, options) {
-  var prettify = require('js-beautify').html;
-  var assembleOptions = options;
+function condense(str) {
+  return str.replace(/(\n|\r){2,}/g, '\n');
+}
 
-  var condense = function(str) {
-    return str.replace(/(\n|\r){2,}/g, '\n');
-  };
+function padcomments(str) {
+  return str.replace(/(\s*<!--)/g, '\n$1');
+}
 
-  var padcomments = function(str) {
-    return str.replace(/(\s*<!--)/g, '\n$1');
-  };
+function fixspaces(str) {
+  return str.replace(/(<\/(a|span|strong|h1|h2|h3|h4|h5|h6)>(?!(,|\.|!|\?|;|:)))/g, '$1 ');
+}
 
-  var fixspaces = function(str) {
-    return str.replace(/(<\/(a|span|strong|h1|h2|h3|h4|h5|h6)>(?!(,|\.|!|\?|;|:)))/g, '$1 ');
-  };
+module.exports.register = function (Handlebars, options) {
+
+  // If the 'assemble.options' object exists, use it. Otherwise use an empty object.
+  var o = options || {};
 
 
   /**
-   * Block helper for prettifying HTML output.
-   * @example:
-   *   {{#prettify indent="2"}}
-   *     {{> body }}
-   *   {{/prettify}}
+   * Prettify
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
    */
   Handlebars.registerHelper('prettify', function (options) {
-    var hash = _.extend(options.hash, assembleOptions.prettify);
-    var content = prettifyHTML(options.fn(this), hash);
+    var opts = {};
+    var content = options.fn(this);
 
-    // Reduce multiple newlines to a single newline
-    if(hash.condense === true) {
-      content = condense(content);
+    // Prettify using js, CSS or HTML mode. 'html' is the default.
+    function prettifyBasedOnMode() {
+      opts.mode = 'html';
+      o.prettify = (opts.mode === 'html') ? o.prettify : o.prettify[opts.mode];
+      opts = _.defaults(options.hash, _.extend({}, opts, engineOpts[opts.mode], o.prettify));
+      opts.indent_size = opts.indent;
+      content = require('js-prettify')[opts.mode](content, opts);
     }
-    // Add a single newline above code comments.
-    if(hash.padcomments === true) {
-      content = padcomments(content);
+
+    // Make it so.
+    prettifyBasedOnMode();
+
+    // Clean up new lines after prettification.
+    if(opts.mode === 'html') {
+      // Reduce multiple newlines to a single newline
+      content = (opts.condense === true) ? condense(content) : content;
+      // Add a single newline above code comments.
+      content = (opts.padcomments === true) ? padcomments(content) : content;
     }
-    return fixspaces(content);
+
+    return new Handlebars.SafeString(fixspaces(content));
   });
-
-
-  /**
-   * Default options passed to js-beautify.
-   * @param {hash arguments} [Options received as hash arguments will override defaults.]
-   * @param {task options}   [Options defined in the task/target override hash arguments.]
-   */
-  var defaults = {};
-  defaults.indent_size = defaults.indent;
-  defaults = _.extend(assembleOptions.prettify, defaults);
-
-
-  /**
-   * Format HTML with js-beautify, pass in options.
-   * @param   {String} source  [The un-prettified HTML.]
-   * @param   {Object} options [Object of options passed to js-beautify.]
-   * @returns {String}         [Stunning HTML.]
-   */
-  var prettifyHTML = function(source, options) {
-    try {
-      return prettify(source, {
-      indent_size: 2,
-      indent_inner_html: true,
-      unformatted: ['code', 'pre', 'em', 'strong']
-    });
-    } catch (e) {
-      console.error(e);
-      console.warn('HTML beautification failed.');
-    }
-  };
 };
