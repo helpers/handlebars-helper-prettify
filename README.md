@@ -219,11 +219,6 @@ When used with `condense`, defining `newlines: true` will result in something li
 </html>
 ```
 
-## Release History
-
-_Nothing yet_
-
-
 ## Author
 
 + [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
