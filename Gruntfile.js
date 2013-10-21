@@ -69,7 +69,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-readme');
-  grunt.loadNpmTasks('grunt-sync-pkg');
   grunt.loadNpmTasks('assemble');
 
   // When the "test" task is run, use Assemble to build templates
@@ -77,6 +76,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['assemble', 'mochaTest']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['clean', 'jshint', 'sync', 'readme']);
+  grunt.registerTask('default', ['clean', 'jshint', 'readme']);
 
 };

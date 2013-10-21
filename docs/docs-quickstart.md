@@ -7,8 +7,8 @@ npm i {%= name %} --save
 Use within your application with the following line of JavaScript:
 
 ```js
-var helpers = require('{%= safename %}');
+var helpers = require('{%= name %}');
 ```
 
-Now your handlebars instance will have access to the {{{%= safename %}}} helper.
+Now your handlebars instance will have access to the {{{%= _.safename(name) %}}} helper.
 

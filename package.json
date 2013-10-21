@@ -1,42 +1,41 @@
 {
-  "name": "prettify",
-  "version": "0.1.7",
+  "name": "handlebars-helper-prettify",
+  "version": "0.1.9",
   "description": "{{prettify}} handlebars helper for formatting (beautifying) HTML, JavaScript and CSS.",
   "main": "prettify.js",
-  "dependencies": {
-    "lodash": "~1.3.1",
-    "js-prettify": "~1.4.0"
-  },
-  "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt": "~0.4.1",
-    "grunt-contrib-nodeunit": "~0.2.1",
-    "grunt-sync-pkg": "~0.1.0",
-    "js-prettify": "~1.4.0",
-    "grunt-mocha-test": "~0.7.0",
-    "assemble": "~0.4.7",
-    "grunt-contrib-clean": "~0.5.0",
-    "assemble-yaml": "~0.1.5",
-    "grunt-readme": "~0.1.7"
-  },
-  "homepage": "https://github.com/helpers/prettify",
+  "homepage": "https://github.com/helpers/handlebars-helper-prettify",
   "author": {
     "name": "Jon Schlinkert",
     "url": "https://github.com/jonschlinkert"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/helpers/prettify.git"
+    "url": "https://github.com/helpers/handlebars-helper-prettify.git"
   },
   "bugs": {
-    "url": "https://github.com/helpers/prettify/issues"
+    "url": "https://github.com/helpers/handlebars-helper-prettify/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/helpers/prettify/blob/master/LICENSE-MIT"
+      "url": "https://github.com/helpers/handlebars-helper-prettify/blob/master/LICENSE-MIT"
     }
   ],
+  "dependencies": {
+    "lodash": "~1.3.1",
+    "js-prettify": "~1.4.0"
+  },
+  "devDependencies": {
+    "assemble": "~0.4.7",
+    "assemble-yaml": "~0.1.5",
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-nodeunit": "~0.2.1",
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-readme": "~0.1.7",
+    "js-prettify": "~1.4.0"
+  },
   "keywords": [
     "beautify",
     "convenience methods",
