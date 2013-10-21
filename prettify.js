@@ -11,23 +11,22 @@
 var _ = require('lodash');
 var engineOpts = require('./lib/defaults');
 
-function condense(str) {
+exports.condense = function(str) {
   return str.replace(/(\n|\r){2,}/g, '\n');
-}
+};
 
-function padcomments(str) {
+exports.padcomments = function(str) {
   return str.replace(/(\s*<!--)/g, '\n$1');
-}
+};
 
-function fixspaces(str) {
+exports.fixspaces = function(str) {
   return str.replace(/(<\/(a|span|strong|h1|h2|h3|h4|h5|h6)>(?!(,|\.|!|\?|;|:)))/g, '$1 ');
-}
+};
 
 module.exports.register = function (Handlebars, options) {
 
   // If the 'assemble.options' object exists, use it. Otherwise use an empty object.
-  var o = options || {};
-
+  var assembleOptions = options || {};
 
   /**
    * Prettify
@@ -40,9 +39,9 @@ module.exports.register = function (Handlebars, options) {
 
     // Prettify using js, CSS or HTML mode. 'html' is the default.
     function prettifyBasedOnMode() {
-      opts.mode = 'html';
-      o.prettify = (opts.mode === 'html') ? o.prettify : o.prettify[opts.mode];
-      opts = _.defaults(options.hash, _.extend({}, opts, engineOpts[opts.mode], o.prettify));
+      opts.mode = options.hash.mode || assembleOptions.prettify.mode || 'html';
+      assembleOptions.prettify = (opts.mode === 'html') ? assembleOptions.prettify : assembleOptions.prettify[opts.mode];
+      opts = _.defaults(options.hash, _.extend({}, opts, engineOpts[opts.mode], assembleOptions.prettify));
       opts.indent_size = opts.indent;
       content = require('js-prettify')[opts.mode](content, opts);
     }
@@ -53,11 +52,11 @@ module.exports.register = function (Handlebars, options) {
     // Clean up new lines after prettification.
     if(opts.mode === 'html') {
       // Reduce multiple newlines to a single newline
-      content = (opts.condense === true) ? condense(content) : content;
+      content = (opts.exports.condense === true) ? exports.condense(content) : content;
       // Add a single newline above code comments.
-      content = (opts.padcomments === true) ? padcomments(content) : content;
+      content = (opts.padcomments === true) ? exports.padcomments(content) : content;
     }
 
-    return new Handlebars.SafeString(fixspaces(content));
+    return new Handlebars.SafeString(exports.fixspaces(content));
   });
 };

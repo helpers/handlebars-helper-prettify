@@ -1,4 +1,4 @@
-# {{prettify}} [![NPM version](https://badge.fury.io/js/prettify.png)](http://badge.fury.io/js/prettify) 
+# {{prettify}} [![NPM version](https://badge.fury.io/js/handlebars-helper-prettify.png)](http://badge.fury.io/js/handlebars-helper-prettify) 
 
 > {{prettify}} handlebars helper for formatting (beautifying) HTML, JavaScript and CSS.
 
@@ -10,13 +10,13 @@ This helper depends on and extends [js-beautify](https://github.com/einars/js-be
 In the root of the project in which you plan to use the helper, in the command line run:
 
 ```bash
-npm i prettify --save
+npm i handlebars-helper-prettify --save
 ```
 
 Use within your application with the following line of JavaScript:
 
 ```js
-var helpers = require('prettify');
+var helpers = require('handlebars-helper-prettify');
 ```
 
 Now your handlebars instance will have access to the {{prettify}} helper.
@@ -367,4 +367,4 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Sat Sep 28 2013 11:48:36._
+_This file was generated on Mon Oct 21 2013 18:08:30._

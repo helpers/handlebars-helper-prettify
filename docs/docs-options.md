@@ -10,20 +10,20 @@ All options from [js-beautify](https://github.com/einars/js-beautify) are availa
 By design, options define here will override options defined anywhere else.
 
 ```handlebars
-{{#{%= safename %} indent=4}}
+{{#{%= _.shortname(name) %} indent=4}}
   {{> body }}
-{{/{%= safename %}}}
+{{/{%= _.shortname(name) %}}}
 ```
 
 
 ### "assemble" task options
-The helper can be used without [Grunt](http://gruntjs.com/) or [Assemble](http://assemble.io). But if you happen to use these two awesome tools you can define options for the helper in your Gruntfile in the `{%= safename %}` sub-options for Assemble:
+The helper can be used without [Grunt](http://gruntjs.com/) or [Assemble](http://assemble.io). But if you happen to use these two awesome tools you can define options for the helper in your Gruntfile in the `{%= _.shortname(name) %}` sub-options for Assemble:
 
 ```javascript
 grunt.initConfig({
   assemble: {
     options: {
-      {%= safename %}: {
+      {%= _.shortname(name) %}: {
         condense: true,
         padcomments: true,
         indent: 4
@@ -48,9 +48,9 @@ Default value: `html` (other options: `js`|`css`)
 If you are formatting HTML, this does not need to be defined, but if you wish to format CSS or JavaScript you must specify either `js` or `css` respectively.
 
 ```js
-{{#{%= safename %} mode="js" indent=4}}
+{{#{%= _.shortname(name) %} mode="js" indent=4}}
 function foo(str) {return str;}
-{{/{%= safename %}}}
+{{/{%= _.shortname(name) %}}}
 ```
 
 Note that when you change the mode, the available _and allowed_ options change as well. If you specify an option for the wrong mode, the helper may or may not throw an error, so be cautious. This can be a bit tricky if you're building a project that is using the {{prettify}} helper in several places with different modes. It's easy to forget that you have a layout wrapped like this:
@@ -63,9 +63,9 @@ Note that when you change the mode, the available _and allowed_ options change a
 and then do this on one of the pages that uses that layout:
 
 ```js
-{{#{%= safename %} mode="js" indent=4}}
+{{#{%= _.shortname(name) %} mode="js" indent=4}}
 function foo(str) {return str;}
-{{/{%= safename %}}}
+{{/{%= _.shortname(name) %}}}
 ```
 
 This won't throw an error, but the JavaScript inside the "js" block will be re-formatted by the outter instance of the helper. So based on this example the JavaScript in the "js" block will be indented to **2 spaces**.
