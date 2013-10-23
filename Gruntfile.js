@@ -13,11 +13,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     jshint: {
-      all: [
-        'Gruntfile.js',
-        'prettify.js',
-        'tests/**/*.js'
-      ],
+      all: ['Gruntfile.js', 'index.js', 'tests/**/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
