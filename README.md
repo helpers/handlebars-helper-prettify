@@ -1,6 +1,6 @@
 # {{prettify}} [![NPM version](https://badge.fury.io/js/handlebars-helper-prettify.png)](http://badge.fury.io/js/handlebars-helper-prettify) 
 
-> {{prettify}} handlebars helper for formatting (beautifying) HTML, JavaScript and CSS.
+> {{prettify}} handlebars helper for formatting/beautifying HTML, JavaScript and CSS.
 
 This helper depends on and extends [js-beautify](https://github.com/einars/js-beautify). Please visit and star that project to show your support.
 
@@ -367,4 +367,4 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Mon Oct 21 2013 18:08:30._
+_This file was generated on Tue Oct 22 2013 23:26:35._
