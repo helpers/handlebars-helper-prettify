@@ -7,8 +7,15 @@ npm i {%= name %} --save
 Use within your application with the following line of JavaScript:
 
 ```js
+<<<<<<< HEAD
+var helpers = require('{%= shortname %}');
+```
+
+Now your handlebars instance will have access to the {{{%= shortname %}}} helper.
+=======
 var helpers = require('{%= name %}');
 ```
 
 Now your handlebars instance will have access to the {{{%= _.safename(name) %}}} helper.
+>>>>>>> refs/remotes/origin/master
 

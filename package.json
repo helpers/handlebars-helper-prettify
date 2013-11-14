@@ -1,7 +1,14 @@
 {
+<<<<<<< HEAD
+  "name": "prettify",
+  "version": "0.2.0",
+  "description": "{{prettify}} handlebars helper for formatting (beautifying) HTML, JavaScript and CSS.",
+  "main": "index.js",
+=======
   "name": "handlebars-helper-prettify",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "{{prettify}} handlebars helper for formatting/beautifying HTML, JavaScript and CSS.",
+>>>>>>> refs/remotes/origin/master
   "homepage": "https://github.com/helpers/handlebars-helper-prettify",
   "author": {
     "name": "Jon Schlinkert",
@@ -9,7 +16,11 @@
   },
   "repository": {
     "type": "git",
+<<<<<<< HEAD
+    "url": "https://github.com/helpers/handlebars-helper-prettify.git"
+=======
     "url": "git://github.com/helpers/handlebars-helper-prettify.git"
+>>>>>>> refs/remotes/origin/master
   },
   "bugs": {
     "url": "https://github.com/helpers/handlebars-helper-prettify/issues"
@@ -20,6 +31,23 @@
       "url": "https://github.com/helpers/handlebars-helper-prettify/blob/master/LICENSE-MIT"
     }
   ],
+  "dependencies": {
+    "lodash": "~2.3.0",
+    "js-beautify": "~1.4.2"
+  },
+  "devDependencies": {
+    "assemble": "~0.4.23",
+    "assemble-yaml": "~0.2.1",
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-readme": "~0.2.4",
+    "grunt-sync-pkg": "~0.1.1",
+    "handlebars": "~1.1.2",
+    "should": "~2.1.0"
+  },
   "keywords": [
     "assemble",
     "beautifier",

@@ -45,7 +45,7 @@ module.exports.register = function (Handlebars, options) {
       assembleOptions.prettify = (opts.mode === 'html') ? assembleOptions.prettify : assembleOptions.prettify[opts.mode];
       opts = _.defaults(options.hash, _.extend({}, opts, engineOpts[opts.mode], assembleOptions.prettify));
       opts.indent_size = opts.indent;
-      content = require('js-prettify')[opts.mode](content, opts);
+      content = require('js-beautify')[opts.mode](content, opts);
     }
 
     // Make it so.

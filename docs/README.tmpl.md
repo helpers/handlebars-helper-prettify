@@ -1,7 +1,11 @@
 ---
 username: jonschlinkert
 ---
+<<<<<<< HEAD
+# {{{%= shortname %}}} [![NPM version](https://badge.fury.io/js/{%= name %}.png)](http://badge.fury.io/js/{%= name %}) {% if (travis) { %} [![Build Status]({%= travis %}.png)]({%= travis %}){% } %}
+=======
 # {{prettify}} [![NPM version](https://badge.fury.io/js/{%= name %}.png)](http://badge.fury.io/js/{%= name %}) {% if (travis) { %} [![Build Status]({%= travis %}.png)]({%= travis %}){% } %}
+>>>>>>> refs/remotes/origin/master
 
 > {%= description %}
 
@@ -15,9 +19,6 @@ This helper depends on and extends [js-beautify](https://github.com/einars/js-be
 ## Options
 {%= _.doc("docs-options.md") %}
 
-## Usage Examples
-{%= _.doc("docs-examples.md") %}
-
 ## Contributing
 Please see the [Contributing to Assemble](http://assemble.io/contributing) guide for information on contributing to this project.
 
@@ -25,7 +26,6 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
 
 + [github.com/{%= username %}](https://github.com/{%= username %})
 + [twitter.com/{%= username %}](http://twitter.com/{%= username %})
-
 
 ## Related Projects and Links
 

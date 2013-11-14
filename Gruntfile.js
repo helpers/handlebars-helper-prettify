@@ -13,7 +13,16 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     jshint: {
+<<<<<<< HEAD
+      all: [
+        'Gruntfile.js',
+        'index.js',
+        'lib/*.js',
+        'test/*.js'
+      ],
+=======
       all: ['Gruntfile.js', 'index.js', 'tests/**/*.js'],
+>>>>>>> refs/remotes/origin/master
       options: {
         curly: true,
         eqeqeq: true,
@@ -25,36 +34,77 @@ module.exports = function(grunt) {
         undef: true,
         boss: true,
         eqnull: true,
-        node: true
+        node: true,
+        globals: {
+          describe: true,
+          it: true
+        }
       }
     },
 
     assemble: {
       options: {
         flatten: true,
-        layoutdir: 'test',
-        helpers: ['./prettify.js']
+        helpers: ['./index.js']
       },
       pages: {
+        options: {
+          it: 'Should prettify the generated HTML using default settings.',
+          prettify: {
+            padcomments: true
+          }
+        },
         src: 'test/fixtures/*.hbs',
         dest: 'test/actual/'
+      },
+      hash_options: {
+        options: {
+          it: 'Should prettify the generated HTML using hash options.',
+        },
+        src: 'test/fixtures/hash-*.hbs',
+        dest: 'test/actual/hash/'
+      },
+      opts_indent4: {
+        options: {
+          it: 'Should indent the generated HTML by 4 spaces',
+          prettify: {indent: 4}
+        },
+        src: 'test/fixtures/opts-indent.hbs',
+        dest: 'test/actual/opts/indent4.html'
+      },
+      opts_indent6: {
+        options: {
+          it: 'Should indent the generated HTML by 6 spaces',
+          prettify: {indent: 6}
+        },
+        src: 'test/fixtures/opts-indent.hbs',
+        dest: 'test/actual/opts/indent6.html'
+      },
+      opts_object: {
+        options: {
+          data: 'test/opts.json',
+          it: 'Should pass an options object to the helper as a parameter.',
+        },
+        src: 'test/fixtures/opts-object.hbs',
+        dest: 'test/actual/opts-object.html'
       }
     },
 
     // Run mocha tests.
     mochaTest: {
-      files: ['test/*.js']
-    },
-    mochaTestConfig: {
-      options: {
-        reporter: 'nyan'
+      tests: {
+        options: {
+          reporter: 'progress',
+        },
+        src: ['test/*_test.js']
       }
     },
+
 
     // Before generating any new files,
     // remove files from previous build.
     clean: {
-      example: ['docs/*.html']
+      example: ['test/actual/**']
     }
 
   });
@@ -72,6 +122,10 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['assemble', 'mochaTest']);
 
   // By default, lint and run all tests.
+<<<<<<< HEAD
+  grunt.registerTask('default', ['clean', 'jshint', 'assemble', 'sync', 'readme']);
+=======
   grunt.registerTask('default', ['clean', 'jshint', 'readme']);
+>>>>>>> refs/remotes/origin/master
 
 };
