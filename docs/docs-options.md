@@ -13,7 +13,6 @@ By design, options define here will override options defined anywhere else. This
 Example:
 
 ```handlebars
-<<<<<<< HEAD
 {{#prettify condense='true'}}
   {{> header }}
 {{/prettify}}
@@ -30,27 +29,13 @@ Example:
 
 #### "assemble" task options
 The helper can be used without [Grunt](http://gruntjs.com/) or [Assemble](http://assemble.io). But if you happen to use these two awesome tools you can define options for the helper in your Gruntfile in the `prettify` sub-options for Assemble:
-=======
-{{#{%= _.shortname(name) %} indent=4}}
-  {{> body }}
-{{/{%= _.shortname(name) %}}}
-```
-
-
-### "assemble" task options
-The helper can be used without [Grunt](http://gruntjs.com/) or [Assemble](http://assemble.io). But if you happen to use these two awesome tools you can define options for the helper in your Gruntfile in the `{%= _.shortname(name) %}` sub-options for Assemble:
->>>>>>> refs/remotes/origin/master
 
 ```javascript
 grunt.initConfig({
   assemble: {
     options: {
-<<<<<<< HEAD
       prettify: {
         mode: 'js',  // 'html' is defined by default
-=======
-      {%= _.shortname(name) %}: {
->>>>>>> refs/remotes/origin/master
         condense: true,
         padcomments: true,
         indent: 4
@@ -64,45 +49,7 @@ grunt.initConfig({
 Options defined in the Assemble task can be viewed as custom "global" defaults, which can be overridden by options defined in the options hash.
 
 
-<<<<<<< HEAD
 ### option defaults
-=======
-## custom options
-
-In addition to the options available from [js-beautify](https://github.com/einars/js-beautify), the following are custom options created specially for this helper.
-
-### mode
-Type: `String`
-Default value: `html` (other options: `js`|`css`)
-
-If you are formatting HTML, this does not need to be defined, but if you wish to format CSS or JavaScript you must specify either `js` or `css` respectively.
-
-```js
-{{#{%= _.shortname(name) %} mode="js" indent=4}}
-function foo(str) {return str;}
-{{/{%= _.shortname(name) %}}}
-```
-
-Note that when you change the mode, the available _and allowed_ options change as well. If you specify an option for the wrong mode, the helper may or may not throw an error, so be cautious. This can be a bit tricky if you're building a project that is using the {{prettify}} helper in several places with different modes. It's easy to forget that you have a layout wrapped like this:
-
-```handlebars
-{{#prettify indent=2}}
-  {{> body }}
-{{/prettify}}
-```
-and then do this on one of the pages that uses that layout:
-
-```js
-{{#{%= _.shortname(name) %} mode="js" indent=4}}
-function foo(str) {return str;}
-{{/{%= _.shortname(name) %}}}
-```
-
-This won't throw an error, but the JavaScript inside the "js" block will be re-formatted by the outter instance of the helper. So based on this example the JavaScript in the "js" block will be indented to **2 spaces**.
-
-
-## option defaults
->>>>>>> refs/remotes/origin/master
 
 The following options are passed to [js-beautify](https://github.com/einars/js-beautify). The defaults are shown for each option.
 

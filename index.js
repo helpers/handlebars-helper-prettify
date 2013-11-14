@@ -6,59 +6,58 @@
  * MIT License
  */
 
-'use strict';
 
+// node_modules
 var _ = require('lodash');
-var engineOpts = require('./lib/defaults');
+var prettifyHTML = require('js-beautify').html;
 
-var condense = function(str) {
-  return str.replace(/(\n|\r){2,}/g, '\n');
-};
+// Local utils.
+var defaults = require('./lib/defaults');
+var Utils    = require('./lib/utils');
 
-var padcomments = function(str) {
-  return str.replace(/(\s*<!--)/g, '\n$1');
-};
 
-var fixspaces = function(str) {
-  return str.replace(/(<\/(a|span|strong|h1|h2|h3|h4|h5|h6)>(?!(,|\.|!|\?|;|:)))/g, '$1 ');
-};
+module.exports.register = function (Handlebars, options, params) {
+  'use strict';
 
-module.exports.register = function (Handlebars, options) {
+  var opts = options || {};
+  opts.prettify = opts.prettify || {};
 
-  // If the 'assemble.options' object exists, use it. Otherwise use an empty object.
-  var assembleOptions = options || {};
-  assembleOptions.prettify = assembleOptions.prettify || {};
 
-  /**
-   * Prettify
-   * @param  {[type]} options [description]
-   * @return {[type]}         [description]
-   */
-  Handlebars.registerHelper('prettify', function (options) {
-    var opts = {};
+  Handlebars.registerHelper('prettify', function(options) {
+    options = options || {};
+    var hash = options.hash || {};
+
+    // Pass an object to the hash. E.g: `{{#prettify opts=foo}}
+    hash.opts = hash.opts || {};
+
+    // Define the mode in which to run prettify: 'html', 'css' or 'js'
+    var mode = hash.mode || 'html';
+    if(mode === 'css' || mode === 'js') {
+      opts.prettify = opts.prettify[mode] || {};
+    }
+
+    // Extend options
+    options = _.extend(options, defaults[mode], opts.prettify, hash, hash.opts);
     var content = options.fn(this);
 
-    // Prettify using js, CSS or HTML mode. 'html' is the default.
-    function prettifyBasedOnMode() {
-      var defaultMode = 'html';
-      opts.mode = options.hash.mode || assembleOptions.prettify.mode || defaultMode;
-      assembleOptions.prettify = (opts.mode === 'html') ? assembleOptions.prettify : assembleOptions.prettify[opts.mode];
-      opts = _.defaults(options.hash, _.extend({}, opts, engineOpts[opts.mode], assembleOptions.prettify));
-      opts.indent_size = opts.indent;
-      content = require('js-beautify')[opts.mode](content, opts);
+    // Alias for indent_size
+    options.indent_size = options.indent;
+
+    // Run js-beautify before cleaning up newlines below.
+    content = require('js-beautify')[mode](content, options);
+
+    // Clean up newlines, spacing
+    if(options.condense === true || options.condense === 'true') {
+      content = Utils.condense(content);
     }
-
-    // Make it so.
-    prettifyBasedOnMode();
-
-    // Clean up new lines after prettification.
-    if(opts.mode === 'html') {
-      // Reduce multiple newlines to a single newline
-      content = (opts.condense === true) ? condense(content) : content;
-      // Add a single newline above code comments.
-      content = (opts.padcomments === true) ? padcomments(content) : content;
+    if(options.padcomments === true || options.padcomments === 'true') {
+      content = Utils.padcomments(content);
     }
-
-    return new Handlebars.SafeString(fixspaces(content));
+    if (mode === 'html') {
+      if(options.fixspaces === true || options.fixspaces === 'true') {
+        content = Utils.fixspaces(content);
+      }
+    }
+    return new Handlebars.SafeString(content);
   });
 };

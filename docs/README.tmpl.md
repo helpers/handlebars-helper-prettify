@@ -1,11 +1,7 @@
 ---
 username: jonschlinkert
 ---
-<<<<<<< HEAD
 # {{{%= shortname %}}} [![NPM version](https://badge.fury.io/js/{%= name %}.png)](http://badge.fury.io/js/{%= name %}) {% if (travis) { %} [![Build Status]({%= travis %}.png)]({%= travis %}){% } %}
-=======
-# {{prettify}} [![NPM version](https://badge.fury.io/js/{%= name %}.png)](http://badge.fury.io/js/{%= name %}) {% if (travis) { %} [![Build Status]({%= travis %}.png)]({%= travis %}){% } %}
->>>>>>> refs/remotes/origin/master
 
 > {%= description %}
 

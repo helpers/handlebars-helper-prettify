@@ -13,16 +13,12 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     jshint: {
-<<<<<<< HEAD
       all: [
         'Gruntfile.js',
         'index.js',
         'lib/*.js',
         'test/*.js'
       ],
-=======
-      all: ['Gruntfile.js', 'index.js', 'tests/**/*.js'],
->>>>>>> refs/remotes/origin/master
       options: {
         curly: true,
         eqeqeq: true,
@@ -115,6 +111,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-readme');
+  grunt.loadNpmTasks('grunt-sync-pkg');
   grunt.loadNpmTasks('assemble');
 
   // When the "test" task is run, use Assemble to build templates
@@ -122,10 +119,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['assemble', 'mochaTest']);
 
   // By default, lint and run all tests.
-<<<<<<< HEAD
   grunt.registerTask('default', ['clean', 'jshint', 'assemble', 'sync', 'readme']);
-=======
-  grunt.registerTask('default', ['clean', 'jshint', 'readme']);
->>>>>>> refs/remotes/origin/master
 
 };
