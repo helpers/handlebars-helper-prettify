@@ -1,6 +1,6 @@
 {
-  "name": "prettify",
-  "version": "0.2.0",
+  "name": "handlebars-helper-prettify",
+  "version": "0.2.1",
   "description": "{{prettify}} handlebars helper for formatting (beautifying) HTML, JavaScript and CSS.",
   "main": "index.js",
   "homepage": "https://github.com/helpers/handlebars-helper-prettify",
