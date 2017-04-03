@@ -22,8 +22,8 @@
     }
   ],
   "dependencies": {
-    "lodash": "~2.3.0",
-    "js-beautify": "~1.4.2"
+    "lodash": "~2.4.1",
+    "js-beautify": "~1.5.5"
   },
   "devDependencies": {
     "assemble": "~0.4.23",
